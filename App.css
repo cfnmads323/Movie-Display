@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: #14161c;
+    color: #e8e9ee;
+}
+
+.app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+ 
+.search {
+  display: flex;
+  gap: 8px;
+  flex: 1 1 320px;
+}
+ 
+.search input {
+  flex: 1;
+}
+ 
+input,
+select,
+button {
+  font: inherit;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #3a3f4d;
+  background: #1f232d;
+  color: inherit;
+}
+ 
+button {
+  cursor: pointer;
+}
+ 
+button:hover:not(:disabled) {
+  background: #2b3140;
+}
+ 
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+ 
+:focus-visible {
+  outline: 2px solid #7aa2ff;
+  outline-offset: 2px;
+}
+ 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+}
+ 
+.card img,
+.no-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #1f232d;
+}
+ 
+.no-poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b90a0;
+}
+ 
+.card h3 {
+  margin: 10px 0 4px;
+  font-size: 1rem;
+}
+ 
+.card p {
+  margin: 2px 0;
+  font-size: 0.875rem;
+  color: #a9adbb;
+}
+ 
+.pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+ 
+.error {
+  color: #ff8a8a;
+}
+ 
+.empty {
+  color: #a9adbb;
+}

@@ -54,14 +54,15 @@ export default function App() {
     };
  
     const sorted = [...movies];
-    if (sortBy === "release_date") {
-        sorted.sort((a, b) => (b.release_date || "").localeCompare(a.release_date || ""));
-    } else if (sortBy === "rating") {
-        sorted.sort((a, b) => b.vote_average - a.vote_average);
-    }
+    const byDate = (a, b) => (a.release_date || "").localeCompare(b.release_date || "");
+    const byRating = (a, b) => a.vote_average - b.vote_average;
+    if (sortBy === "release_date_asc") sorted.sort(byDate);
+    else if (sortBy === "release_date_desc") sorted.sort((a, b) => byDate(b, a));
+    else if (sortBy === "vote_average_asc") sorted.sort(byRating);
+    else if (sortBy === "vote_average_desc") sorted.sort((a, b) => byRating(b, a));
  
     return (
-    <div className="app">
+    <h1 className="site-title">Movie Explorer</h1>
       <header className="toolbar">
         <form onSubmit={handleSearch} className="search">
           <input
@@ -73,9 +74,11 @@ export default function App() {
           <button type="submit">Search</button>
         </form>
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="">Sort by</option>
-          <option value="release_date">Release date</option>
-          <option value="rating">Average rating</option>
+            <option value="">Sort By</option>
+            <option value="release_date_asc">Release Date (Asc)</option>
+            <option value="release_date_desc">Release Date (Desc)</option>
+            <option value="vote_average_asc">Rating (Asc)</option>
+            <option value="vote_average_desc">Rating (Desc)</option>
         </select>
       </header>
  

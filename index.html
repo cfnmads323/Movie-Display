@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ToDO -->
+    <header class="site-header">
+        <h1>Movie Explorer</h1>
+    </header>
+
+    <div class="controls">
+        <input type="text" id="search-input" placeholder="Search for a movie...">
+        <select id="sort-select">
+            <option value="">Sort By</option>
+            <option value="release_date_asc">Release Date (Asc)</option>
+            <option value="release_date_desc">Release Date (Desc)</option>
+            <option value="vote_average_asc">Rating (Asc)</option>
+            <option value="vote_average_desc">Rating (Desc)</option>
+        </select>
+    </div>
+
+    <main>
+        <div id="movie-grid" class="movie-grid"></div>
+        <p id="message" class="message"></p>
+    </main>
+
+    <footer class="pagination">
+        <button id="prev-btn">Previous</button>
+        <span id="page-number">Page 1</span>
+        <button id="next-btn">Next</button>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

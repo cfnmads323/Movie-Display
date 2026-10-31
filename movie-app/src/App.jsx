@@ -14,8 +14,8 @@ function MovieCard({ movie }) {
         <div className="no-poster">No poster</div>
       )}
       <h3>{movie.title}</h3>
-      <p>Release date: {movie.release_date || "Unknown"}</p>
-      <p>Rating: {movie.vote_average.toFixed(1)}</p>
+      <p>Release Date: {movie.release_date || "Unknown"}</p>
+      <p>Rating: {movie.vote_average}</p>
     </article>
   );
 }
@@ -24,13 +24,14 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [input, setInput] = useState("");
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const url = query
+    let cancelled = false;
+    let q = query.trim();
+    const url = q
       ? `${BASE}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`
       : `${BASE}/movie/popular?api_key=${API_KEY}&page=${page}`;
 
@@ -40,17 +41,23 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
+        if (cancelled) return;
         setMovies(data.results);
         setTotalPages(Math.min(data.total_pages, 500));
         setError("");
       })
-      .catch(() => setError("Could not load movies. Check your API key."));
+      .catch(() => {
+        if (!cancelled) setError("Could not load movies. Check your API key.");
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [query, page]);
 
   const handleSearch = (e) => {
-    e.preventDefault();
+    setQuery(e.target.value);
     setPage(1);
-    setQuery(input.trim());
   };
 
   const sorted = [...movies];
@@ -65,17 +72,17 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1 className="site-title">Movie Explorer</h1>
-      <header className="toolbar">
-        <form onSubmit={handleSearch} className="search">
-          <input
-            type="text"
-            placeholder="Search movies by title"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
+      <header className="site-header">
+        <h1>Movie Explorer</h1>
+      </header>
+
+      <div className="controls">
+        <input
+          type="text"
+          placeholder="Search for a movie..."
+          value={query}
+          onChange={handleSearch}
+        />
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value="">Sort By</option>
           <option value="release_date_asc">Release Date (Asc)</option>
@@ -83,20 +90,21 @@ export default function App() {
           <option value="vote_average_asc">Rating (Asc)</option>
           <option value="vote_average_desc">Rating (Desc)</option>
         </select>
-      </header>
+      </div>
 
-      {error && <p className="error">{error}</p>}
-      {!error && sorted.length === 0 && (
-        <p className="empty">No movies found.</p>
-      )}
-
-      <main className="grid">
-        {sorted.map((m) => (
-          <MovieCard key={m.id} movie={m} />
-        ))}
+      <main>
+        {error && <p className="message">{error}</p>}
+        {!error && sorted.length === 0 && (
+          <p className="message">No movies found.</p>
+        )}
+        <div className="movie-grid">
+          {sorted.map((m) => (
+            <MovieCard key={m.id} movie={m} />
+          ))}
+        </div>
       </main>
 
-      <footer className="pager">
+      <footer className="pagination">
         <button onClick={() => setPage((p) => p - 1)} disabled={page <= 1}>
           Previous
         </button>

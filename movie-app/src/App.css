@@ -1,116 +1,129 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-.site-title {
-  margin: 0 0 20px;
-}
-
+ 
 body {
-    margin: 0;
-    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-    background: #14161c;
-    color: #e8e9ee;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f0f0f0;
+  color: #111;
 }
-
-.app {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px 16px 40px;
+ 
+.site-header {
+  background: #29343f;
+  padding: 44px 16px;
+  text-align: center;
 }
-
-.toolbar {
+ 
+.site-header h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 2.6rem;
+}
+ 
+.controls {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  padding: 18px 16px;
+  background: #2c3e55;
 }
  
-.search {
-  display: flex;
-  gap: 8px;
-  flex: 1 1 320px;
-}
- 
-.search input {
-  flex: 1;
-}
- 
-input,
-select,
-button {
+.controls input,
+.controls select {
   font: inherit;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #3a3f4d;
-  background: #1f232d;
-  color: inherit;
+  font-size: 1rem;
+  padding: 9px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
 }
  
-button {
-  cursor: pointer;
+.controls input {
+  width: 165px;
 }
  
-button:hover:not(:disabled) {
-  background: #2b3140;
-}
- 
-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.controls select {
+  width: 165px;
 }
  
 :focus-visible {
-  outline: 2px solid #7aa2ff;
+  outline: 2px solid #4d90fe;
   outline-offset: 2px;
 }
  
-.grid {
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 16px 0;
+}
+ 
+.movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
+}
+ 
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 12px 12px 18px;
+  text-align: center;
 }
  
 .card img,
 .no-poster {
+  display: block;
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  border-radius: 6px;
-  background: #1f232d;
+  border-radius: 10px;
+  background: #ddd;
 }
  
 .no-poster {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8b90a0;
+  color: #666;
 }
  
 .card h3 {
-  margin: 10px 0 4px;
-  font-size: 1rem;
+  margin: 16px 0 12px;
+  font-size: 1.35rem;
 }
  
 .card p {
-  margin: 2px 0;
-  font-size: 0.875rem;
-  color: #a9adbb;
+  margin: 8px 0;
+  font-size: 0.95rem;
 }
  
-.pager {
+.message {
+  text-align: center;
+  color: #555;
+}
+ 
+.pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  margin-top: 32px;
+  padding: 28px 16px 40px;
 }
  
-.error {
-  color: #ff8a8a;
+.pagination button {
+  font: inherit;
+  padding: 8px 16px;
+  border: 1px solid #2c3e55;
+  border-radius: 4px;
+  background: #2c3e55;
+  color: #fff;
+  cursor: pointer;
 }
  
-.empty {
-  color: #a9adbb;
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css"
+import "./App.css";
 
 const API_KEY = "a9eb901f9fcf404a4c7d94471f83fc3a";
 const BASE = "https://api.themoviedb.org/3";
@@ -62,7 +62,8 @@ export default function App() {
     else if (sortBy === "vote_average_desc") sorted.sort((a, b) => byRating(b, a));
  
     return (
-    <h1 className="site-title">Movie Explorer</h1>
+    <div className="app">
+      <h1 className="site-title">Movie Explorer</h1>
       <header className="toolbar">
         <form onSubmit={handleSearch} className="search">
           <input
